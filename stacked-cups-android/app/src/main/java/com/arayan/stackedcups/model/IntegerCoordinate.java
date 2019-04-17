@@ -67,4 +67,9 @@ public final class IntegerCoordinate implements Coordinate<Integer, Integer, Int
     public int hashCode() {
         return getIndex();
     }
+
+    @Override
+    public boolean equals(final Object cmp) {
+        return this.hashCode() == cmp.hashCode();
+    }
 }

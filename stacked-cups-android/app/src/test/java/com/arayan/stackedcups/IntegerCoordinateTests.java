@@ -6,7 +6,12 @@ import com.arayan.stackedcups.model.interfaces.Coordinate;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class IntegerCoordinateTests {
 
@@ -110,5 +115,48 @@ public class IntegerCoordinateTests {
 
         assertEquals("expected x-value to be 65535", 65535, (int)coordinate.getX());
         assertEquals("expected y-value to be 65535", 65535, (int)coordinate.getY());
+    }
+
+    @Test
+    public void copy_coordinates() throws InvalidArgumentException {
+        for (int x = 1; x < 100; x++) {
+            final int xVal = x * 2;
+            final int yVal = x * 7;
+
+            final Coordinate<Integer, Integer, Integer> coordinate1 = new IntegerCoordinate(xVal, yVal);
+            final Coordinate<Integer, Integer, Integer> coordinate2 = new IntegerCoordinate(xVal, yVal);
+
+            final Coordinate<Integer, Integer, Integer> coordinate3 = new IntegerCoordinate(yVal, xVal);
+
+            assertTrue("expected values to be equal " + coordinate1.getIndex() + " " + coordinate2.getIndex(), coordinate1.equals(coordinate2));
+            assertFalse("expected values not to be equal " + coordinate1.getIndex() + " " + coordinate3.getIndex(), coordinate1.equals(coordinate3));
+            assertFalse("expected values not to be equal " + coordinate2.getIndex() + " " + coordinate3.getIndex(), coordinate2.equals(coordinate3));
+        }
+    }
+
+    @Test
+    public void hash_coordinates() throws InvalidArgumentException {
+        final Map<Coordinate, Integer> map = new HashMap<>();
+
+        // insert into the hashmap
+        for (int x = 0; x < 100; x++) {
+            final int xVal = x * 2;
+            final int yVal = x * 7;
+
+            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(xVal, yVal);
+
+            map.put(coordinate, coordinate.getIndex());
+        }
+
+        // read from the hashmap
+        for (int x = 0; x < 100; x++) {
+            final int xVal = x * 2;
+            final int yVal = x * 7;
+
+            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(xVal, yVal);
+
+            assertTrue("expected values to be in hashmap " + coordinate.getIndex(), map.containsKey(coordinate));
+            assertTrue("expected values to match hashed value", map.get(coordinate).equals(coordinate.getIndex()));
+        }
     }
 }
