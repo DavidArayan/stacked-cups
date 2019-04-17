@@ -21,9 +21,7 @@ public final class UnfillableCup implements Cup {
         INSTANCE = new UnfillableCup();
     }
 
-    // represents a coordinate that will never fall within a valid range
-    // when hashing against other stacked cups
-    private static final Coordinate<Integer, Integer, Integer> COORDINATE = new IntegerCoordinate(0, Integer.MAX_VALUE);
+    private static final Coordinate<Integer, Integer, Integer> COORDINATE = new IntegerCoordinate();
 
     // don't allow an instance of this class to be created anywhere
     private UnfillableCup() {}

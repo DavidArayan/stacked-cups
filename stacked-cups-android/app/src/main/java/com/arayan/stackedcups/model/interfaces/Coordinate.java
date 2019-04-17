@@ -1,5 +1,7 @@
 package com.arayan.stackedcups.model.interfaces;
 
+import com.arayan.stackedcups.model.exceptions.InvalidArgumentException;
+
 import androidx.annotation.NonNull;
 
 /**
@@ -12,5 +14,5 @@ public interface Coordinate<X, Y, HashType> {
     Y getY();
     HashType getIndex();
 
-    @NonNull Coordinate<X, Y, HashType> copy();
+    @NonNull Coordinate<X, Y, HashType> copy() throws InvalidArgumentException;
 }

@@ -37,7 +37,14 @@ public final class CupStackLUT implements CupLUT {
 
     @Override
     public @NonNull Cup getCup(final int rowIndex, final int colIndex) {
-        final Coordinate<Integer, Integer, Integer> lutCoordinate = new IntegerCoordinate(rowIndex, colIndex);
+        final Coordinate<Integer, Integer, Integer> lutCoordinate;
+
+        try {
+            lutCoordinate = new IntegerCoordinate(rowIndex, colIndex);
+        }
+        catch (final InvalidArgumentException e) {
+            return UnfillableCup.INSTANCE;
+        }
 
         // if the requested cup exists, just return as normal
         final Cup retCup = cupsLUT.get(lutCoordinate);
