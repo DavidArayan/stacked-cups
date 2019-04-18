@@ -10,8 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class IntegerCoordinateTests {
 
@@ -128,9 +129,9 @@ public class IntegerCoordinateTests {
 
             final Coordinate<Integer, Integer, Integer> coordinate3 = new IntegerCoordinate(yVal, xVal);
 
-            assertTrue("expected values to be equal " + coordinate1.getIndex() + " " + coordinate2.getIndex(), coordinate1.equals(coordinate2));
-            assertFalse("expected values not to be equal " + coordinate1.getIndex() + " " + coordinate3.getIndex(), coordinate1.equals(coordinate3));
-            assertFalse("expected values not to be equal " + coordinate2.getIndex() + " " + coordinate3.getIndex(), coordinate2.equals(coordinate3));
+            assertEquals("expected values to be equal " + coordinate1.getIndex() + " " + coordinate2.getIndex(), coordinate1, coordinate2);
+            assertNotEquals("expected values not to be equal " + coordinate1.getIndex() + " " + coordinate3.getIndex(), coordinate1, coordinate3);
+            assertNotEquals("expected values not to be equal " + coordinate2.getIndex() + " " + coordinate3.getIndex(), coordinate2, coordinate3);
         }
     }
 
@@ -156,7 +157,37 @@ public class IntegerCoordinateTests {
             final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(xVal, yVal);
 
             assertTrue("expected values to be in hashmap " + coordinate.getIndex(), map.containsKey(coordinate));
-            assertTrue("expected values to match hashed value", map.get(coordinate).equals(coordinate.getIndex()));
+            assertEquals("expected values to match hashed value", map.get(coordinate), coordinate.getIndex());
         }
+    }
+
+    @Test
+    public void create_coordinate_x_negative() {
+        try {
+            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(-1, 0);
+
+            fail("expected an exception to be thrown as negative x values are not allowed");
+        }
+        catch (final InvalidArgumentException ignored) {}
+    }
+
+    @Test
+    public void create_coordinate_y_negative() {
+        try {
+            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(0, -1);
+
+            fail("expected an exception to be thrown as negative y values are not allowed");
+        }
+        catch (final InvalidArgumentException ignored) {}
+    }
+
+    @Test
+    public void create_coordinate_xy_negative() {
+        try {
+            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(-1, -1);
+
+            fail("expected an exception to be thrown as negative xy values are not allowed");
+        }
+        catch (final InvalidArgumentException ignored) {}
     }
 }

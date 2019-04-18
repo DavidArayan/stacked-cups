@@ -1,6 +1,11 @@
 package com.arayan.stackedcups.model.interfaces;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
+
+import com.arayan.stackedcups.model.exceptions.InvalidArgumentException;
+
+import java.io.InvalidObjectException;
 
 /**
  * Provides structures and methods for interfacing
@@ -21,4 +26,30 @@ public interface CupLUT<T extends Cup> {
      *          that a valid Cup is returned.
      */
     @NonNull T getCup(final int rowIndex, final int colIndex);
+
+    /**
+     * @return  Returns the Cup at the root position (0,0). This method
+     *          will always return a valid and Non-Null Cup object.
+     */
+    @NonNull T getRootCup();
+
+    /**
+     * Function splits the provided Cup into it's left and right sub-children
+     * and stores them internally. Use the getCup() functionality to query
+     * for the Cups.
+     *
+     * @param cup The Cup to split. Must be valid and Non-Null, also must already
+     *            exist in the LUT structure. Use getRootCup() to split the root Cup
+     *            initially.
+     *
+     * @return  Returns a Pair of Cups representing the left and right splits. This function
+     *          will return a Pair of Cups that are invalid - check via Cup.isValid() if
+     *          the split fails
+     */
+    @NonNull Pair<Cup, Cup> splitAndStoreChildren(@NonNull final Cup cup) throws InvalidArgumentException, InvalidObjectException;
+
+    /**
+     * @return All the volume in all the cups summed
+     */
+    int getTotalVolume();
 }

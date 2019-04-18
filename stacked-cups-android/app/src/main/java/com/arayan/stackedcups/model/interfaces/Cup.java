@@ -50,6 +50,20 @@ public interface Cup {
     @NonNull Coordinate<Integer, Integer, Integer> getCoordinate();
 
     /**
+     * @return  Generate a hashing index to be used for LUT operations,
+     *          this Coordinate can be used to grab the Cup that is the
+     *          left child of this Cup.
+     */
+    @NonNull Coordinate<Integer, Integer, Integer> getLeftChildCoordinate();
+
+    /**
+     * @return  Generate a hashing index to be used for LUT operations,
+     *          this Coordinate can be used to grab the Cup that is the
+     *          right child of this Cup.
+     */
+    @NonNull Coordinate<Integer, Integer, Integer> getRightChildCoordinate();
+
+    /**
      * @return  Returns true if this cup is a valid cup. Sometimes cups
      *          can be generated that are not part of the stacked cups
      *          hierarchy.

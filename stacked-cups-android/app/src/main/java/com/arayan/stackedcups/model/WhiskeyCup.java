@@ -8,6 +8,7 @@ import com.arayan.stackedcups.model.interfaces.CupLUT;
 import java.io.InvalidObjectException;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 /**
  * Represents a Cup that can store only good quality Whiskey liquid.
@@ -22,6 +23,8 @@ public final class WhiskeyCup implements Cup {
 
     // each Cup has a special unique coordinate
     private final Coordinate<Integer, Integer, Integer> coordinate;
+    private final Coordinate<Integer, Integer, Integer> leftCoordinate;
+    private final Coordinate<Integer, Integer, Integer> rightCoordinate;
 
     // the amount of whiskey we are holding
     private int currentVolume;
@@ -49,9 +52,19 @@ public final class WhiskeyCup implements Cup {
         }
 
         this.coordinate = new IntegerCoordinate(row, col);
+        this.leftCoordinate = new IntegerCoordinate(row + 1, col);
+        this.rightCoordinate = new IntegerCoordinate(row + 1, col + 1);
 
         this.volumeCapacity = volumeCapacity;
         this.currentVolume = 0;
+
+        // check if we have reached our Cup capacity
+        // this should never happen
+        // if the stack limit has reached, which ius 2^16 maximum values,
+        // these coordinates will be equal to one another
+        if (this.coordinate.equals(this.leftCoordinate) || this.coordinate.equals(this.rightCoordinate)) {
+            throw new InvalidArgumentException("row|col", "maximum stack limit reached");
+        }
     }
 
     @Override
@@ -101,24 +114,23 @@ public final class WhiskeyCup implements Cup {
         final int leftVolume = difference / 2;
         final int rightVolume = difference - leftVolume;
 
-        // get our current Cup coordinates so we can lookup our child Cups
-        final int i = getCoordinate().getX();
-        final int j = getCoordinate().getY();
+        // this will never be null
+        final Pair splitCups = lut.splitAndStoreChildren(this);
 
-        final Cup leftCup = lut.getCup(i + 1, j);
+        final Cup leftCup = (Cup) splitCups.first;
 
         // this is a safety check, but it should never happen
-        if (!leftCup.isValid()) {
+        if (leftCup == null || !leftCup.isValid()) {
             // throw error
-            throw new InvalidObjectException("the left child node from CupLUT.getCup(" + (i + 1) + "," + j + ") is invalid");
+            throw new InvalidObjectException("the left child node from CupLUT.splitAndStoreChildren() is invalid");
         }
 
-        final Cup rightCup = lut.getCup(i + 1, j + 1);
+        final Cup rightCup = (Cup) splitCups.second;
 
         // this is a safety check, but it should never happen
-        if (!rightCup.isValid()) {
+        if (rightCup == null || !rightCup.isValid()) {
             // throw error
-            throw new InvalidObjectException("the right child node from CupLUT.getCup(" + (i + 1) + "," + (j + 1) + ") is invalid");
+            throw new InvalidObjectException("the right child node from CupLUT.splitAndStoreChildren() is invalid");
         }
 
         // these values will propagate down to child nodes
@@ -129,6 +141,17 @@ public final class WhiskeyCup implements Cup {
     @Override
     public @NonNull Coordinate<Integer, Integer, Integer> getCoordinate() {
         return coordinate;
+    }
+
+    @Override
+    public @NonNull Coordinate<Integer, Integer, Integer> getLeftChildCoordinate() {
+        return leftCoordinate;
+    }
+
+    @NonNull
+    @Override
+    public Coordinate<Integer, Integer, Integer> getRightChildCoordinate() {
+        return rightCoordinate;
     }
 
     @Override
@@ -143,6 +166,6 @@ public final class WhiskeyCup implements Cup {
 
     @Override
     public int hashCode() {
-        return coordinate.getIndex();
+        return getCoordinate().getIndex();
     }
 }

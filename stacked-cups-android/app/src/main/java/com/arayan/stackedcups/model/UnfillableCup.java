@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 public final class UnfillableCup implements Cup {
 
     // the only instance that should exist for this class
-    public static final UnfillableCup INSTANCE;
+    static final Cup INSTANCE;
 
     static {
         INSTANCE = new UnfillableCup();
@@ -53,6 +53,16 @@ public final class UnfillableCup implements Cup {
     }
 
     @Override
+    public @NonNull Coordinate<Integer, Integer, Integer> getLeftChildCoordinate() {
+        return getCoordinate();
+    }
+
+    @Override
+    public @NonNull Coordinate<Integer, Integer, Integer> getRightChildCoordinate() {
+        return getCoordinate();
+    }
+
+    @Override
     public boolean isValid() {
         return false;
     }
@@ -64,6 +74,6 @@ public final class UnfillableCup implements Cup {
 
     @Override
     public int hashCode() {
-        return COORDINATE.getIndex();
+        return getCoordinate().getIndex();
     }
 }
