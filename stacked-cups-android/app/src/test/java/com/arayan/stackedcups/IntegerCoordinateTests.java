@@ -14,7 +14,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class IntegerCoordinateTests {
+public final class IntegerCoordinateTests {
 
     @Test
     public void create_coordinate_default() {

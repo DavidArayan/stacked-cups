@@ -11,7 +11,7 @@ import java.io.InvalidObjectException;
  * Provides structures and methods for interfacing
  * with stacked Cups in a hierarchical manner
  */
-public interface CupLUT<T extends Cup> {
+public interface CupLUT {
 
     /**
      * Provided a row and column (2D coordinates) returns a Cup
@@ -25,13 +25,13 @@ public interface CupLUT<T extends Cup> {
      *          object will never be null. Check via Cup.isValid() to ensure
      *          that a valid Cup is returned.
      */
-    @NonNull T getCup(final int rowIndex, final int colIndex);
+    @NonNull Cup getCup(final int rowIndex, final int colIndex);
 
     /**
      * @return  Returns the Cup at the root position (0,0). This method
      *          will always return a valid and Non-Null Cup object.
      */
-    @NonNull T getRootCup();
+    @NonNull Cup getRootCup();
 
     /**
      * Function splits the provided Cup into it's left and right sub-children
