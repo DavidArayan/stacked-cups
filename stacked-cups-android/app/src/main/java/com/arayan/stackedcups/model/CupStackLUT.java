@@ -148,8 +148,20 @@ public final class CupStackLUT implements CupLUT {
 
     @Override
     public int getTotalVolume() {
+        int totalVolume = getRootCup().getCurrentVolume();
+
         // start from the root and propagate down
-        return getTotalVolumeFrom(getRootCup());
+        try {
+            totalVolume += getTotalVolumeFrom(getRootCup().getLeftChildCoordinate());
+        }
+        catch (InvalidArgumentException ignored) {}
+
+        return totalVolume;
+    }
+
+    @Override
+    public void fill(int volume) throws InvalidObjectException, InvalidArgumentException {
+        getCup(0,0).fill(this, volume);
     }
 
     /**
@@ -160,19 +172,22 @@ public final class CupStackLUT implements CupLUT {
      * If the overall construction logic is correct, this should never get
      * stuck.. however it might cause a stack overflow depending on the depth
      */
-    private int getTotalVolumeFrom(@NonNull final Cup cup) {
-        int totalVolume = cup.getCurrentVolume();
+    private int getTotalVolumeFrom(@NonNull final Coordinate<Integer, Integer, Integer> coordinate) throws InvalidArgumentException {
+        int totalVolume = 0;
+        // get the entire row of cups. We use this method since there are
+        // shared nodes in our construction that we don't want to count twice.
+        // another method is simply to use a marked HashMap and recurse down that way
+        for (int colIndex = 0; colIndex <= coordinate.getX(); colIndex++) {
+            final Cup cup = getCup(coordinate.getX(), colIndex);
 
-        final Cup leftCup = getCup(cup.getLeftChildCoordinate().getX(), cup.getLeftChildCoordinate().getY());
-
-        if (leftCup.isValid()) {
-            totalVolume += getTotalVolumeFrom(leftCup);
+            if (cup.isValid()) {
+                totalVolume += cup.getCurrentVolume();
+            }
         }
 
-        final Cup rightCup = getCup(cup.getRightChildCoordinate().getX(), cup.getRightChildCoordinate().getY());
-
-        if (rightCup.isValid()) {
-            totalVolume += getTotalVolumeFrom(rightCup);
+        // only recurse down if there were cups in this row with active positive volume
+        if (totalVolume > 0) {
+            totalVolume += getTotalVolumeFrom(new IntegerCoordinate(coordinate.getX() + 1, 0));
         }
 
         return totalVolume;

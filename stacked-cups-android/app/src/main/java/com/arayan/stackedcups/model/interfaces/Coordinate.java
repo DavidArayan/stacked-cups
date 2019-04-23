@@ -5,7 +5,7 @@ import com.arayan.stackedcups.model.exceptions.InvalidArgumentException;
 import androidx.annotation.NonNull;
 
 /**
- * Represents a simple 2D coordinate object.
+ * Represents a simple, immutable 2D coordinate object.
  * Special functionality of the Coordinate objects are that
  * each Coordinate object is hashed according to it's internal values.
  */

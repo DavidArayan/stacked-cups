@@ -95,7 +95,7 @@ public final class WhiskeyCup implements Cup {
         }
 
         final int newVolume = getCurrentVolume() + volume;
-        final int difference = getCapacity() - newVolume;
+        final int difference = newVolume - getCapacity();
 
         // nothing overflows to child Cups, simply update
         // and exit

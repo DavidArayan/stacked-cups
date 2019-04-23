@@ -52,4 +52,12 @@ public interface CupLUT {
      * @return All the volume in all the cups summed
      */
     int getTotalVolume();
+
+    /**
+     * Fills the stack of cups with volume starting from the top of the stack
+     * and filling downwards.
+     *
+     * @param volume The amount of volume to fill
+     */
+    void fill(final int volume) throws InvalidObjectException, InvalidArgumentException;
 }

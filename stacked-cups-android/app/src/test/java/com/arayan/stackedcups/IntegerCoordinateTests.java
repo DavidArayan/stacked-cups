@@ -164,7 +164,7 @@ public final class IntegerCoordinateTests {
     @Test
     public void create_coordinate_x_negative() {
         try {
-            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(-1, 0);
+            new IntegerCoordinate(-1, 0);
 
             fail("expected an exception to be thrown as negative x values are not allowed");
         }
@@ -174,7 +174,7 @@ public final class IntegerCoordinateTests {
     @Test
     public void create_coordinate_y_negative() {
         try {
-            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(0, -1);
+            new IntegerCoordinate(0, -1);
 
             fail("expected an exception to be thrown as negative y values are not allowed");
         }
@@ -184,7 +184,7 @@ public final class IntegerCoordinateTests {
     @Test
     public void create_coordinate_xy_negative() {
         try {
-            final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(-1, -1);
+            new IntegerCoordinate(-1, -1);
 
             fail("expected an exception to be thrown as negative xy values are not allowed");
         }
