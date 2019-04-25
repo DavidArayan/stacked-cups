@@ -14,14 +14,14 @@ Android/Java application solving the [Stacked Cups](https://math.stackexchange.c
 
 The following tools are required to compile and run the code.
 
-- [Android Studio](https://developer.android.com/studio)
+-   [Android Studio](https://developer.android.com/studio)
 
 #### Guide
 
 Refer to the following guides to run the code using Android Studio.
 
-- [Running Android Application](https://developer.android.com/studio/run)
-- [Running Unit Tests](https://developer.android.com/studio/test)
+-   [Running Android Application](https://developer.android.com/studio/run)
+-   [Running Unit Tests](https://developer.android.com/studio/test)
 
 #### Launching the app
 
