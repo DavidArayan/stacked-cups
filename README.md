@@ -29,7 +29,7 @@ Compile and run either in an Android Device simulator or on an Android device vi
 
 #### Assumptions
 
-the following assumptions about the problem have been made during the coding excercise.
+the following assumptions about the problem have been made during the coding exercise.
 
 -   The smallest amount of liquid that can be added into the cups is 1ml
 -   There is no inherent limit to how large the stacked cups can grow, however this application has a depth limit of 65536 including the root cup (topmost cup)
