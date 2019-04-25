@@ -25,8 +25,13 @@ public final class CupStackTests {
     }
 
     @Test
-    public void createLutTableValid() throws InvalidArgumentException {
-        new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
+    public void createLutTableValid() {
+        try {
+            new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
+        }
+        catch (final Exception e) {
+            fail("CupStackLUT should have initialised properly");
+        }
     }
 
     @Test

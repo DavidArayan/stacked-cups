@@ -139,21 +139,11 @@ public final class CupTests {
     public void cupFillMultiChainEmpty() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
-        stackOfCups.fill(217);
-
-        assertEquals("Excepted Cup(0,0) to contain volume of 217", 217, stackOfCups.getCup(0,0).getCurrentVolume());
-        assertEquals("Expected total volume to be 217", 217, stackOfCups.getTotalVolume());
-
-        stackOfCups.fill(315);
+        stackOfCups.fill(532);
 
         // 282 is the leftover once root cup is filled to capacity of 250
         final int expectedLeftVolume = 282 / 2;
         final int expectedRightVolume = 282 - expectedLeftVolume;
-
-        assertEquals("Excepted Cup(0,0) to contain volume of " + CUP_VOLUME, CUP_VOLUME, stackOfCups.getCup(0,0).getCurrentVolume());
-        assertEquals("Excepted Cup(1,0) to contain volume of " + expectedLeftVolume, expectedLeftVolume, stackOfCups.getCup(1,0).getCurrentVolume());
-        assertEquals("Excepted Cup(1,1) to contain volume of " + expectedRightVolume, expectedRightVolume, stackOfCups.getCup(1,1).getCurrentVolume());
-        assertEquals("Expected total volume to be 532", 532, stackOfCups.getTotalVolume());
 
         // we discard all of the volume from the root
         stackOfCups.getRootCup().drainCurrentVolume();

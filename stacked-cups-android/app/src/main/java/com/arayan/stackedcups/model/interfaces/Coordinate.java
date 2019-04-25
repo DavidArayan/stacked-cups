@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
  * Special functionality of the Coordinate objects are that
  * each Coordinate object is hashed according to it's internal values.
  */
-public interface Coordinate<X, Y, HashType> {
+public interface Coordinate<X, Y, H> {
     X getX();
     Y getY();
-    HashType getIndex();
+    H getIndex();
 
-    @NonNull Coordinate<X, Y, HashType> copy() throws InvalidArgumentException;
+    @NonNull Coordinate<X, Y, H> copy() throws InvalidArgumentException;
 }
