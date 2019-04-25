@@ -1,5 +1,6 @@
 package com.arayan.stackedcups.model;
 
+import com.arayan.stackedcups.model.exceptions.InvalidCallException;
 import com.arayan.stackedcups.model.interfaces.Coordinate;
 import com.arayan.stackedcups.model.interfaces.Cup;
 import com.arayan.stackedcups.model.interfaces.CupLUT;
@@ -44,7 +45,7 @@ public final class UnfillableCup implements Cup {
     @Override
     public void fill(@NonNull final CupLUT lut, final int volume) {
         // throw a runtime exception letting the user know something went wrong
-        throw new RuntimeException("UnfillableCup -> fill(CupLUT, Integer) -> called a function with no implementation, did you forget to call Cup.isValid()?");
+        throw new InvalidCallException("UnfillableCup -> fill(CupLUT, Integer) -> called a function with no implementation, did you forget to call Cup.isValid()?");
     }
 
     @Override

@@ -18,7 +18,7 @@ public final class CupTests {
     private static final int CUP_VOLUME = 250;
 
     @Test
-    public void cup_fill_invalid() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillInvalid() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         try {
@@ -30,7 +30,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_zero() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillZero() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(0);
@@ -39,7 +39,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_under() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillUnder() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(100);
@@ -48,7 +48,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_exact() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillExact() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(250);
@@ -57,7 +57,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_over() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillOver() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(300);
@@ -66,7 +66,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_oversplit() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillOversplit() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(CUP_VOLUME * 10);
@@ -75,7 +75,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_chain() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillChain() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(CUP_VOLUME + 217);
@@ -89,7 +89,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_total() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillTotal() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         final int totalVolume = (CUP_VOLUME * 10) + 986;
@@ -100,7 +100,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_variable_capacity() throws InvalidArgumentException {
+    public void cupFillVariableCapacity() throws InvalidArgumentException {
         // variable capacity cups are not allowed in a single stack
         final AtomicInteger variableCupsVolume = new AtomicInteger(CUP_VOLUME);
 
@@ -115,7 +115,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_multi_chain() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillMultiChain() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(217);
@@ -136,7 +136,7 @@ public final class CupTests {
     }
 
     @Test
-    public void cup_fill_multi_chain_empty() throws InvalidArgumentException, InvalidObjectException {
+    public void cupFillMultiChainEmpty() throws InvalidArgumentException, InvalidObjectException {
         final CupLUT stackOfCups = new CupStackLUT((row, col) -> new WhiskeyCup(CUP_VOLUME, row, col));
 
         stackOfCups.fill(217);

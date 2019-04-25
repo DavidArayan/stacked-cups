@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
 public final class IntegerCoordinateTests {
 
     @Test
-    public void create_coordinate_default() {
+    public void createCoordinateDefault() {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate();
 
         assertEquals("expected x-value to be 65535", 65535, (int)coordinate.getX());
@@ -25,7 +25,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_zero_xy() throws InvalidArgumentException {
+    public void createCoordinateZeroXY() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(0,0);
 
         assertEquals("expected x-value to be 0", 0, (int)coordinate.getX());
@@ -33,7 +33,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_x() throws InvalidArgumentException {
+    public void createCoordinateX() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(782,0);
 
         assertEquals("expected x-value to be 782", 782, (int)coordinate.getX());
@@ -41,7 +41,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_y() throws InvalidArgumentException {
+    public void createCoordinateY() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(0,1094);
 
         assertEquals("expected x-value to be 0", 0, (int)coordinate.getX());
@@ -49,7 +49,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_xy() throws InvalidArgumentException {
+    public void createCoordinateXY() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(893,782);
 
         assertEquals("expected x-value to be 893", 893, (int)coordinate.getX());
@@ -57,7 +57,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_looped() throws InvalidArgumentException {
+    public void createCoordinateLooped() throws InvalidArgumentException {
         for (int x = 0; x < 100; x++) {
             for (int y = 0; y < 100; y++) {
                 final int xVal = x * 6;
@@ -71,7 +71,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_x_max() throws InvalidArgumentException {
+    public void createCoordinateXMax() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(65535,0);
 
         assertEquals("expected x-value to be 65535", 65535, (int)coordinate.getX());
@@ -79,7 +79,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_y_max() throws InvalidArgumentException {
+    public void createCoordinateYMax() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(0,65535);
 
         assertEquals("expected x-value to be 0", 0, (int)coordinate.getX());
@@ -87,7 +87,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_xy_max() throws InvalidArgumentException {
+    public void createCoordinateXYMax() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(65535,65535);
 
         assertEquals("expected x-value to be 65535", 65535, (int)coordinate.getX());
@@ -95,7 +95,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_x_max_overflow() throws InvalidArgumentException {
+    public void createCoordinateXMaxOverflow() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(Integer.MAX_VALUE,0);
 
         assertEquals("expected x-value to be 65535", 65535, (int)coordinate.getX());
@@ -103,7 +103,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_y_max_overflow() throws InvalidArgumentException {
+    public void createCoordinateYMaxOverflow() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(0, Integer.MAX_VALUE);
 
         assertEquals("expected x-value to be 0", 0, (int)coordinate.getX());
@@ -111,7 +111,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_xy_max_overflow() throws InvalidArgumentException {
+    public void createCoordinateXYMaxOverflow() throws InvalidArgumentException {
         final Coordinate<Integer, Integer, Integer> coordinate = new IntegerCoordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
         assertEquals("expected x-value to be 65535", 65535, (int)coordinate.getX());
@@ -119,7 +119,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void copy_coordinates() throws InvalidArgumentException {
+    public void copyCoordinates() throws InvalidArgumentException {
         for (int x = 1; x < 100; x++) {
             final int xVal = x * 2;
             final int yVal = x * 7;
@@ -136,7 +136,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void hash_coordinates() throws InvalidArgumentException {
+    public void hashCoordinates() throws InvalidArgumentException {
         final Map<Coordinate, Integer> map = new HashMap<>();
 
         // insert into the hashmap
@@ -162,7 +162,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_x_negative() {
+    public void createCoordinateXNegative() {
         try {
             new IntegerCoordinate(-1, 0);
 
@@ -172,7 +172,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_y_negative() {
+    public void createCoordinateYNegative() {
         try {
             new IntegerCoordinate(0, -1);
 
@@ -182,7 +182,7 @@ public final class IntegerCoordinateTests {
     }
 
     @Test
-    public void create_coordinate_xy_negative() {
+    public void createCoordinateXYNegative() {
         try {
             new IntegerCoordinate(-1, -1);
 

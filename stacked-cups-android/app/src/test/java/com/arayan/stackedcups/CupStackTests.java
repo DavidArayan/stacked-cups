@@ -15,7 +15,7 @@ import static junit.framework.TestCase.fail;
 public final class CupStackTests {
 
     @Test
-    public void create_lut_table_null() {
+    public void createLutTableNull() {
         try {
             new CupStackLUT(null);
 
@@ -25,12 +25,12 @@ public final class CupStackTests {
     }
 
     @Test
-    public void create_lut_table_valid() throws InvalidArgumentException {
+    public void createLutTableValid() throws InvalidArgumentException {
         new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
     }
 
     @Test
-    public void create_lut_table_get_root() throws InvalidArgumentException {
+    public void createLutTableGetRoot() throws InvalidArgumentException {
         final CupLUT lut = new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
 
         final Cup cup = lut.getCup(0,0);
@@ -41,7 +41,7 @@ public final class CupStackTests {
     }
 
     @Test
-    public void create_lut_table_root_volume_zero() {
+    public void createLutTableRootVolumeZero() {
         try {
             new CupStackLUT((row, col) -> new WhiskeyCup(0, row, col));
 
@@ -51,7 +51,7 @@ public final class CupStackTests {
     }
 
     @Test
-    public void create_lut_table_root_volume_negative() {
+    public void createLutTableRootVolumeNegative() {
         try {
             new CupStackLUT((row, col) -> new WhiskeyCup(-1, row, col));
 

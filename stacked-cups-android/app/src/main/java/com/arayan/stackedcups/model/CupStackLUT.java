@@ -19,15 +19,6 @@ import androidx.core.util.Pair;
  * For function signature documentation, refer to the interfaces
  */
 public final class CupStackLUT implements CupLUT {
-
-    /**
-     * Represents a simple factory implementation to create Cups by
-     * the implementing function
-     */
-    public interface CupStackLUTFactory {
-        Cup create(final int row, final int col) throws InvalidArgumentException;
-    }
-
     // stores all our Cups using the Coordinate object as a hash key
     // this is because each Cup has a specific coordinate that cannot
     // be duplicated, ie, cannot have two cups at position (0,0)
@@ -37,6 +28,14 @@ public final class CupStackLUT implements CupLUT {
 
     // this will never be null
     private final CupStackLUTFactory factory;
+
+    /**
+     * Represents a simple factory implementation to create Cups by
+     * the implementing function
+     */
+    public interface CupStackLUTFactory {
+        Cup create(final int row, final int col) throws InvalidArgumentException;
+    }
 
     public CupStackLUT(final CupStackLUTFactory factory) throws InvalidArgumentException {
         if (factory == null) {
@@ -87,41 +86,32 @@ public final class CupStackLUT implements CupLUT {
         final Cup lCup = cupsLUT.containsKey(leftCoord) ? cupsLUT.get(leftCoord) : factory.create(leftCoord.getX(), leftCoord.getY());
         final Cup rCup = cupsLUT.containsKey(rightCoord) ? cupsLUT.get(rightCoord) : factory.create(rightCoord.getX(), rightCoord.getY());
 
-        // we don't accept null cups
-        if (lCup == null) {
-            throw new InvalidObjectException("the provided left-cup cannot be null");
-        }
-
-        // we only accept valid cups
-        if (!lCup.isValid()) {
-            throw new InvalidObjectException("the provided left-cup must be valid");
-        }
-
-        // all cups must be the same capacity as the root cup
-        if (lCup.getCapacity() != getRootCup().getCapacity()) {
-            throw new InvalidObjectException("the provided left-cup must have the same capacity as all other cups");
-        }
-
-        // we don't accept null cups
-        if (rCup == null) {
-            throw new InvalidObjectException("the provided right-cup cannot be null");
-        }
-
-        // we only accept valid cups
-        if (!rCup.isValid()) {
-            throw new InvalidObjectException("the provided right-cup must be valid");
-        }
-
-        // all cups must be the same capacity as the root cup
-        if (rCup.getCapacity() != getRootCup().getCapacity()) {
-            throw new InvalidObjectException("the provided right-cup must have the same capacity as all other cups");
-        }
+        // check validity of our cups
+        checkValidity(lCup);
+        checkValidity(rCup);
 
         cupsLUT.put(lCup.getCoordinate(), lCup);
         cupsLUT.put(rCup.getCoordinate(), rCup);
 
         // finally return our split cups
         return new Pair<>(lCup, rCup);
+    }
+
+    private void checkValidity(final Cup cup) throws InvalidObjectException {
+        // we don't accept null cups
+        if (cup == null) {
+            throw new InvalidObjectException("the provided cup cannot be null");
+        }
+
+        // we only accept valid cups
+        if (!cup.isValid()) {
+            throw new InvalidObjectException("the provided cup must be valid");
+        }
+
+        // all cups must be the same capacity as the root cup
+        if (cup.getCapacity() != getRootCup().getCapacity()) {
+            throw new InvalidObjectException("the provided cup must have the same capacity as all other cups");
+        }
     }
 
     @Override
