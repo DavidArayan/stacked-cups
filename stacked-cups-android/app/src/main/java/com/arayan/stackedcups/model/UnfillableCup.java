@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 public final class UnfillableCup implements Cup {
 
     // the only instance that should exist for this class
-    static final Cup INSTANCE;
+    private static final Cup INSTANCE;
 
     static {
         INSTANCE = new UnfillableCup();
@@ -26,6 +26,10 @@ public final class UnfillableCup implements Cup {
 
     // don't allow an instance of this class to be created anywhere
     private UnfillableCup() {}
+
+    public static final Cup getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public int getCurrentVolume() {

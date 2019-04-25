@@ -122,7 +122,7 @@ public final class CupStackLUT implements CupLUT {
             lutCoordinate = new IntegerCoordinate(rowIndex, colIndex);
         }
         catch (final InvalidArgumentException e) {
-            return UnfillableCup.INSTANCE;
+            return UnfillableCup.getInstance();
         }
 
         // if the requested cup exists, just return as normal
@@ -133,7 +133,7 @@ public final class CupStackLUT implements CupLUT {
         }
 
         // safe to send as UnfillableCup instance never stores state
-        return UnfillableCup.INSTANCE;
+        return UnfillableCup.getInstance();
     }
 
     @Override
