@@ -26,3 +26,20 @@ Refer to the following guides to run the code using Android Studio.
 #### Launching the app
 
 Compile and run either in an Android Device simulator or on an Android device via Android Studio.
+
+#### Assumptions
+
+the following assumptions about the problem have been made during the coding excercise.
+
+-   The smallest amount of liquid that can be added into the cups is 1ml
+-   There is no inherent limit to how large the stacked cups can grow, however this application has a depth limit of 65536 including the root cup (topmost cup)
+-   The UI/UX has been designed to allow adding liquid from the top of the stacked cups, however the structure allows adding liquid to any of the cups at any time
+-   liquid can be removed from any of the cups at any time without breaking the structure
+-   The application is stateful, as in liquid can be added and removed at any time and state will be preserved
+-   The Stacked Cups structure grows automatically depending on the amount of liquid being added, cups which have not been created cannot be queried. Previously empty cups can still be queried.
+-   The Data Structure used for the Stacked Cups assumes that the stack of the cups will always be triangular/pyramid in shape
+-   Individual cups in the Stacked Cups Data Structure cannot have variable volumes, however the volume can be customized when the first cup is created (the root cup)
+
+#### Known bugs and issues
+
+There are at least 2 critical logic bugs in the application, but I'm not going to say what they are. If they can be found, I'm happy to discuss them.
