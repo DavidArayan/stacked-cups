@@ -25,15 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
     // our page views, inflated during onCreate
     private View pageAbout;
+    private View pageFillCup;
+    private View pageQuery;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
                 switch (item.getItemId()) {
                     case R.id.navigation_fill_cups:
-                        showPage(null);
+                        showPage(pageFillCup);
                         return true;
                     case R.id.navigation_query:
-                        showPage(null);
+                        showPage(pageQuery);
                         return true;
                     case R.id.navigation_about:
                         showPage(pageAbout);
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             stackedCups = new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
-            //showPage(null);
+            showPage(pageFillCup);
         }
         catch (final InvalidArgumentException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -68,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
      */
     @SuppressLint("InflateParams")
     private void inflatePages() {
-        this.pageAbout = getLayoutInflater().inflate(R.layout.page_about, null);
+        pageAbout = getLayoutInflater().inflate(R.layout.page_about, null);
+        pageFillCup = getLayoutInflater().inflate(R.layout.page_fillcup, null);
+        pageQuery = getLayoutInflater().inflate(R.layout.page_query, null);
     }
 
     private void showPage(@NonNull final View page) {
