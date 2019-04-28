@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewController pageFillCup;
     private ViewController pageQuery;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
                 switch (item.getItemId()) {
                     case R.id.navigation_fill_cups:
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
