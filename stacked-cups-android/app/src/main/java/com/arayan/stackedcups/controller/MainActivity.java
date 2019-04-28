@@ -1,5 +1,6 @@
 package com.arayan.stackedcups.controller;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.arayan.stackedcups.R;
@@ -19,20 +20,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private View holderView;
+    private ViewGroup holderView;
     private CupLUT stackedCups;
+
+    // our page views, inflated during onCreate
+    private View pageAbout;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
                 switch (item.getItemId()) {
                     case R.id.navigation_fill_cups:
-                        showCupsView();
+                        showPage(null);
                         return true;
                     case R.id.navigation_query:
-                        showQueryView();
+                        showPage(null);
                         return true;
                     case R.id.navigation_about:
-                        showAboutView();
+                        showPage(pageAbout);
                         return true;
                 }
                 return false;
@@ -46,32 +50,32 @@ public class MainActivity extends AppCompatActivity {
         holderView = findViewById(R.id.holder_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // inflate our page views for the user
+        inflatePages();
+
         try {
             stackedCups = new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
+            //showPage(null);
         }
         catch (final InvalidArgumentException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    private void showCupsView() {
-        removeAllChildViews();
-        if (checkValidity()) {
-
-        }
+    /**
+     * Inflate all our navigation pages, we will push/pop these pages to/from
+     * the stack
+     */
+    @SuppressLint("InflateParams")
+    private void inflatePages() {
+        this.pageAbout = getLayoutInflater().inflate(R.layout.page_about, null);
     }
 
-    private void showQueryView() {
+    private void showPage(@NonNull final View page) {
         removeAllChildViews();
+
         if (checkValidity()) {
-
-        }
-    }
-
-    private void showAboutView() {
-        removeAllChildViews();
-        if (checkValidity()) {
-
+            holderView.addView(page);
         }
     }
 
@@ -79,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
      * Removes any previews views from the stack
      */
     private void removeAllChildViews() {
-        if (holderView != null && holderView instanceof ViewGroup) {
-            ((ViewGroup)holderView).removeAllViews();
+        if (holderView != null) {
+            holderView.removeAllViews();
         }
         else {
             Toast.makeText(this, getString(R.string.navigation_failure), Toast.LENGTH_LONG).show();
