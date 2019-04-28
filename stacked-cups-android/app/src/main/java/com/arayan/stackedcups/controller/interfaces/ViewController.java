@@ -1,6 +1,5 @@
 package com.arayan.stackedcups.controller.interfaces;
 
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;

@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_about:
                         showView(pageAbout);
                         return true;
+
+                        default:
+                            return false;
                 }
-                return false;
             };
 
     @Override
