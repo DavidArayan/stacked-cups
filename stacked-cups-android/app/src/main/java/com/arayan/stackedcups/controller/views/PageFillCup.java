@@ -26,18 +26,23 @@ public final class PageFillCup extends BaseView {
 
         // on button click, we check the volume that we need to add and add it in
         addLiquidButton.setOnClickListener(view -> {
-            final int volumeToAdd = Integer.valueOf(liquidAddView.getText().toString());
+            try {
+                final int volumeToAdd = Integer.valueOf(liquidAddView.getText().toString());
 
-            if (volumeToAdd > 0) {
-                try {
-                    getLut().fill(volumeToAdd);
+                if (volumeToAdd > 0) {
+                    try {
+                        getLut().fill(volumeToAdd);
+                    }
+                    catch (final Exception e) {
+                        Toast.makeText(getView().getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-                catch (final Exception e) {
-                    Toast.makeText(getView().getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(getView().getContext(), "Input volume must be greater than zero", Toast.LENGTH_SHORT).show();
                 }
             }
-            else {
-                Toast.makeText(getView().getContext(), "Input volume must be greater than zero", Toast.LENGTH_SHORT).show();
+            catch (final NumberFormatException e) {
+                Toast.makeText(getView().getContext(), "Input was invalid", Toast.LENGTH_SHORT).show();
             }
 
             updateVolumeDisplay();
