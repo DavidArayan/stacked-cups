@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Stacked Cups</string>
+    <string name="title_activity_main">Stacked Cups</string>
+    <string name="title_fill_cups">Fill Cups</string>
+    <string name="title_query_cups">Query Cups</string>
+    <string name="title_about">About</string>
 </resources>
