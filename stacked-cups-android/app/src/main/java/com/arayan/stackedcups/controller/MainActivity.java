@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
             = item -> {
                 switch (item.getItemId()) {
                     case R.id.navigation_fill_cups:
-                        pageFillCup.show(holderView);
+                        showView(pageFillCup);
                         return true;
                     case R.id.navigation_query:
-                        pageQuery.show(holderView);
+                        showView(pageQuery);
                         return true;
                     case R.id.navigation_about:
-                        pageAbout.show(holderView);
+                        showView(pageAbout);
                         return true;
                 }
                 return false;
@@ -51,11 +51,12 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         try {
+            // it would be nice to have a UI to customize the volumeCapacity being entered..
             stackedCups = new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
 
             createPages();
 
-            pageFillCup.show(holderView);
+            showView(pageFillCup);
         }
         catch (final InvalidArgumentException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -70,5 +71,15 @@ public class MainActivity extends AppCompatActivity {
         pageAbout = new PageAbout(stackedCups, this);
         pageFillCup = new PageFillCup(stackedCups, this);
         pageQuery = new PageQuery(stackedCups, this);
+    }
+
+    /**
+     * Perform some simple null checks and place the provided view
+     * into the view hierarchy
+     */
+    private void showView(final ViewController controller) {
+        if (holderView != null && controller != null) {
+            controller.show(holderView);
+        }
     }
 }
