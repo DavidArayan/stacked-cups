@@ -5,4 +5,5 @@
     <string name="title_query_cups">Query Cups</string>
     <string name="title_about">About</string>
     <string name="navigation_failure">unable to perform navigation</string>
+    <string name="stackcup_null_message">unable to interact with stacked-cups since initialisation failed</string>
 </resources>

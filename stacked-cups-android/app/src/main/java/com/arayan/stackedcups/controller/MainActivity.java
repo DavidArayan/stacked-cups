@@ -3,6 +3,10 @@ package com.arayan.stackedcups.controller;
 import android.os.Bundle;
 
 import com.arayan.stackedcups.R;
+import com.arayan.stackedcups.model.CupStackLUT;
+import com.arayan.stackedcups.model.WhiskeyCup;
+import com.arayan.stackedcups.model.exceptions.InvalidArgumentException;
+import com.arayan.stackedcups.model.interfaces.CupLUT;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private View holderView;
+    private CupLUT stackedCups;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -40,27 +45,59 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         holderView = findViewById(R.id.holder_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        try {
+            stackedCups = new CupStackLUT((row, col) -> new WhiskeyCup(250, row, col));
+        }
+        catch (final InvalidArgumentException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void showCupsView() {
         removeAllChildViews();
+        if (checkValidity()) {
+
+        }
     }
 
     private void showQueryView() {
         removeAllChildViews();
+        if (checkValidity()) {
+
+        }
     }
 
     private void showAboutView() {
         removeAllChildViews();
+        if (checkValidity()) {
+
+        }
     }
 
+    /**
+     * Removes any previews views from the stack
+     */
     private void removeAllChildViews() {
         if (holderView != null && holderView instanceof ViewGroup) {
             ((ViewGroup)holderView).removeAllViews();
         }
         else {
-            final Toast toast = Toast.makeText(this, getString(R.string.navigation_failure), Toast.LENGTH_LONG);
-            toast.show();
+            Toast.makeText(this, getString(R.string.navigation_failure), Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Checks for validity before pushing interaction views on top of the stack
+     * @return true if valid, false otherwise
+     */
+    private boolean checkValidity() {
+        if (stackedCups == null) {
+            Toast.makeText(this, getString(R.string.stackcup_null_message), Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        return true;
     }
 }
