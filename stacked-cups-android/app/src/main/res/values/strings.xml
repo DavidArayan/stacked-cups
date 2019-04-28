@@ -8,5 +8,7 @@
 
     <!-- These are text used in pages -->
     <string name="about_text">This is a simple code exercise on solving the stacked cups problem as described in the source repository at https://github.com/DavidArayan/stacked-cups</string>
-    <string name="fillcup_header">Use the form below to add volume in ml to the stacked cups hierarchy</string>
+    <string name="fillcup_header">Use the form below to add volume in ml to the stacked cups hierarchy. Use the Query functionality to check the amount of volume contained in each cup. Each cup contains 250ml volume capacity.</string>
+    <string name="fillcup_button_text">Add Liquid</string>
+    <string name="fillcup_input_hint">enter volume to add</string>
 </resources>
