@@ -8,4 +8,5 @@
 
     <!-- These are text used in pages -->
     <string name="about_text">This is a simple code exercise on solving the stacked cups problem as described in the source repository at https://github.com/DavidArayan/stacked-cups</string>
+    <string name="fillcup_header">Use the form below to add volume in ml to the stacked cups hierarchy</string>
 </resources>
