@@ -11,4 +11,9 @@
     <string name="fillcup_header">Use the form below to add volume in ml to the stacked cups hierarchy. Use the Query functionality to check the amount of volume contained in each cup. Each cup contains 250ml volume capacity.</string>
     <string name="fillcup_button_text">Add Liquid</string>
     <string name="fillcup_input_hint">enter volume to add</string>
+    <string name="query_invalid_range_message">The provided cup coordinates are not within valid query ranges</string>
+    <string name="query_header">Use the form below to check the amount of contained liquid in each individual cup</string>
+    <string name="query_row_input_hint">enter row index</string>
+    <string name="query_col_input_hint">enter cup index</string>
+    <string name="query_button_text">Show Results</string>
 </resources>

@@ -81,5 +81,8 @@ public class MainActivity extends AppCompatActivity {
         if (holderView != null && controller != null) {
             controller.show(holderView);
         }
+        else {
+            Toast.makeText(this, R.string.navigation_failure, Toast.LENGTH_LONG).show();
+        }
     }
 }

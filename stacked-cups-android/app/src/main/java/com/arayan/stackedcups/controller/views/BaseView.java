@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import com.arayan.stackedcups.controller.interfaces.ViewController;
 import com.arayan.stackedcups.model.interfaces.CupLUT;
 
+/**
+ * Handles all the base functionality for all views
+ */
 public abstract class BaseView implements ViewController {
 
     private final CupLUT lut;
